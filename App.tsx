@@ -372,6 +372,39 @@ const App: React.FC = () => {
           </div>
         </div>
       </main>
+
+      <footer className="bg-gray-900 text-white py-12 no-print mt-auto">
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <Grid3X3 className="text-blue-400" size={24} />
+              <span className="text-xl font-bold">Cruciverba AI</span>
+            </div>
+            <p className="text-gray-400 text-sm">Unione perfetta tra enigmistica classica e intelligenza artificiale. Genera sfide infinite per la tua mente o per i tuoi studenti.</p>
+          </div>
+          <div>
+            <h4 className="font-bold mb-4 text-blue-400">Opzioni Stampa</h4>
+            <ul className="text-gray-400 text-sm space-y-2">
+              <li className="flex items-center gap-2"><div className="w-1 h-1 bg-blue-500 rounded-full"></div> Formato A4 (Verticale)</li>
+              <li className="flex items-center gap-2"><div className="w-1 h-1 bg-blue-500 rounded-full"></div> Formato A3 (Poster)</li>
+              <li className="flex items-center gap-2"><div className="w-1 h-1 bg-blue-500 rounded-full"></div> Schemi vuoti per competizioni</li>
+              <li className="flex items-center gap-2"><div className="w-1 h-1 bg-blue-500 rounded-full"></div> Soluzioni complete</li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-bold mb-4 text-blue-400">Copyright</h4>
+            <p className="text-gray-400 text-sm mb-4">© {new Date().getFullYear()} Fabio Orengo - MIT License</p>
+            <div className="flex flex-wrap gap-2">
+              <span className="px-2 py-1 bg-gray-800 rounded border border-gray-700 text-[10px] text-gray-400">GEMINI FLASH 3</span>
+              <span className="px-2 py-1 bg-gray-800 rounded border border-gray-700 text-[10px] text-gray-400">REACT</span>
+              <span className="px-2 py-1 bg-gray-800 rounded border border-gray-700 text-[10px] text-gray-400">LUCIDE</span>
+            </div>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 pt-12 mt-12 border-t border-gray-800 text-center text-gray-500 text-xs uppercase tracking-widest">
+          Creato con passione per l'enigmistica italiana • Fabio Orengo • {new Date().getFullYear()}
+        </div>
+      </footer>
       {crossword && <PrintLayout data={crossword} config={printConfig} />}
     </div>
   );

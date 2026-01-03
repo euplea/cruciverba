@@ -3,7 +3,8 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { Difficulty, RawEntry } from "../types";
 
 export const fetchCrosswordContent = async (topic: string, difficulty: Difficulty, manualWords?: string[]): Promise<RawEntry[]> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+  // Fix: Initialize with process.env.API_KEY directly as per guidelines
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
   let prompt = "";
   if (manualWords && manualWords.length > 0) {
@@ -62,7 +63,8 @@ export const fetchCrosswordContent = async (topic: string, difficulty: Difficult
     }
   });
 
-  const data = JSON.parse(response.text);
+  // Fix: safely parse response.text, which is a getter string property
+  const data = JSON.parse(response.text || '{"entries": []}');
   return data.entries.map((e: any) => ({
     word: e.word.toUpperCase().replace(/[^A-Z]/g, ''),
     clue: e.clue,
@@ -71,7 +73,8 @@ export const fetchCrosswordContent = async (topic: string, difficulty: Difficult
 };
 
 export const fetchWordSuggestions = async (topic: string, existingWords: string[]): Promise<string[]> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+  // Fix: Initialize with process.env.API_KEY directly
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
   const prompt = `Sei un assistente per la creazione di cruciverba. 
     Dato il tema "${topic}" and queste parole già inserite: [${existingWords.join(", ")}], 
@@ -91,7 +94,8 @@ export const fetchWordSuggestions = async (topic: string, existingWords: string[
         }
       }
     });
-    return JSON.parse(response.text);
+    // Fix: safely parse response.text
+    return JSON.parse(response.text || '[]');
   } catch (e) {
     console.error("Errore suggerimenti:", e);
     return [];
